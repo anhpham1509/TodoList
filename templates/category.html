@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    {% if tasks %}
+        <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Check</th>
+                <th>Things to do</th>
+                <th>Deadline</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td><input type="checkbox" name="thing"></td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.deadline }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p><strong>No tasks currently in category.</strong></p>
+    {% endif %}
+<a href="/app/category/{{ category_name_slug }}/add_task/">
+    <svg height="12" width="12" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+        <image height="12" width="12" xlink:href="{% static "icons/add_icon.svg" %}"/>
+    </svg>
+    <i>Add Task</i>
+</a>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <form id="category_form" method="post" action="/app/add_category/" xmlns="http://www.w3.org/1999/html"
+          xmlns="http://www.w3.org/1999/html">
+
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+
+            <div class="form-group">
+                <label>{{ field.help_text }}</label>
+
+                <div class="input-group">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <input type="submit" name="submit" value="Create Category"/>
+    </form>
+{% endblock %}
